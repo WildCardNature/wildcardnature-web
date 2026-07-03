@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Satzquatch — Indie App Studio</title>
+<meta name="description" content="Satzquatch is an independent app studio building mobile apps: DiscVault, LeafPrint, Vigil and WildCard Nature — published on the Solana dApp Store and beyond." />
+<link rel="canonical" href="https://satzquatch.com" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Satzquatch — Indie App Studio" />
+<meta property="og:description" content="Independent app studio. Makers of DiscVault, LeafPrint, Vigil and WildCard Nature." />
+<meta property="og:url" content="https://satzquatch.com" />
+<style>
+:root{
+  --ink:#0d0f12; --panel:#171a20; --edge:#2a2e37;
+  --text:#f0f2f5; --mute:#8b93a3; --accent:#5fbf7a;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--ink); color:var(--text);
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  line-height:1.6; min-height:100vh;
+  display:flex; flex-direction:column;
+}
+main{width:min(860px,92vw); margin:0 auto; flex:1}
+header{padding:72px 0 20px}
+.mark{display:flex; align-items:center; gap:14px}
+.mark svg{flex:0 0 auto}
+h1{font-size:clamp(28px,6vw,40px); letter-spacing:.02em}
+.tag{color:var(--mute); font-size:17px; margin-top:8px; max-width:56ch}
+h2{font-size:13px; text-transform:uppercase; letter-spacing:.24em; color:var(--accent); margin:44px 0 16px}
+.apps{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:14px}
+.app{
+  background:var(--panel); border:1px solid var(--edge); border-radius:14px;
+  padding:20px; display:block; color:inherit; text-decoration:none;
+  transition:border-color .15s, transform .15s;
+}
+a.app:hover{border-color:var(--accent); transform:translateY(-2px)}
+.app h3{font-size:18px; display:flex; align-items:center; gap:8px}
+.app .badge{font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--mute);
+  border:1px solid var(--edge); border-radius:999px; padding:2px 8px}
+.app p{color:var(--mute); font-size:14px; margin-top:8px}
+.app .link{color:var(--accent); font-size:13px; margin-top:12px; display:inline-block}
+footer{border-top:1px solid var(--edge); margin-top:56px; padding:24px 0 40px; color:var(--mute); font-size:13px}
+footer .inner{width:min(860px,92vw); margin:0 auto; display:flex; flex-wrap:wrap; gap:6px 24px; justify-content:space-between}
+footer a{color:var(--mute)}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="mark">
+      <svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true">
+        <rect x="2" y="2" width="40" height="40" rx="10" fill="#171a20" stroke="#5fbf7a" stroke-width="2"/>
+        <path d="M13 29c3-1 4-4 3-7 2 1 5 0 6-3 1 3 4 4 6 3-1 3 0 6 3 7-2 2-16 2-18 0z" fill="#5fbf7a"/>
+        <circle cx="18.5" cy="21" r="1.4" fill="#0d0f12"/>
+        <circle cx="25.5" cy="21" r="1.4" fill="#0d0f12"/>
+      </svg>
+      <h1>Satzquatch</h1>
+    </div>
+    <p class="tag">An independent one-person app studio. I build focused mobile apps — collection
+    tools, nature tech and utilities — published on the Solana dApp Store, Google Play and the web.</p>
+  </header>
+
+  <h2>Apps</h2>
+  <div class="apps">
+    <a class="app" href="https://discvault.us">
+      <h3>DiscVault <span class="badge">Android</span></h3>
+      <p>The collector-grade vault for your DVD, Blu-ray &amp; 4K movie collection. Scan barcodes,
+      track every edition, never double-buy. Local-first — your data stays on your device.</p>
+      <span class="link">discvault.us →</span>
+    </a>
+    <a class="app" href="https://leafprint-site.vercel.app">
+      <h3>Leafprint <span class="badge">Android · 21+</span></h3>
+      <p>Your cannabis, curated. Track and organize your collection privately. 21+ only.</p>
+      <span class="link">Visit site →</span>
+    </a>
+    <a class="app" href="https://wildcardnature.github.io/Vigil/">
+      <h3>Vigil <span class="badge">Android</span></h3>
+      <p>Your Solana command center — track airdrops, watch whale wallets in real time, scan
+      tokens for safety and manage your portfolio. Non-custodial, no account needed.</p>
+      <span class="link">Visit site →</span>
+    </a>
+    <a class="app" href="https://wildcardnature-web.vercel.app/">
+      <h3>WildCard Nature <span class="badge">Coming soon</span></h3>
+      <p>Photograph real wildlife and watch AI transform it into collectible trading cards with
+      rarity tiers and lore — minted on Solana.</p>
+      <span class="link">Join the waitlist →</span>
+    </a>
+  </div>
+
+  <h2>Contact</h2>
+  <p style="color:var(--mute);font-size:15px">
+    Publisher &amp; support: <a style="color:var(--accent)" href="mailto:tex@discvault.us">tex@discvault.us</a>
+  </p>
+</main>
+
+<footer>
+  <div class="inner">
+    <span>© 2026 Satzquatch. All rights reserved.</span>
+    <span>Apps have their own privacy policies &amp; terms — see each app's site or listing.</span>
+  </div>
+</footer>
+</body>
+</html>
