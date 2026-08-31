@@ -1,4 +1,10 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/wildcard-nature/assets/:file",
+      "destination": "/assets/:file"
+    }
+  ]
 }
