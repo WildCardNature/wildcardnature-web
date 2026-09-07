@@ -1,115 +1,31 @@
 <!doctype html>
-<html lang="en" id="root">
+<html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Satzquatch — Indie App Studio</title>
-<meta name="description" content="Satzquatch is an independent app studio building mobile apps: DiscVault, LeafPrint, Vigil and WildCard Nature — published on the Solana dApp Store and beyond." />
-<link rel="canonical" href="https://satzquatch.com" />
-<link rel="icon" href="favicon.svg" type="image/svg+xml" />
-<meta name="theme-color" content="#0b1215" />
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Satzquatch — Indie App Studio" />
-<meta property="og:description" content="Independent app studio. Makers of DiscVault, LeafPrint, Vigil and WildCard Nature." />
-<meta property="og:url" content="https://satzquatch.com" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400;0,500;0,600;0,700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css" />
-<script>
-(function(){
-  var t = localStorage.getItem('theme');
-  if (t === 'light' || (!t && window.matchMedia('(prefers-color-scheme: light)').matches))
-    document.documentElement.classList.add('theme-light');
-})();
-</script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Satzquatch — A mind in motion</title>
+<meta name="description" content="Step inside Satzquatch, an independent app studio. Explore DiscVault, Leafprint, Vigil and WildCard Nature on a journey through the circuitry.">
+<meta name="theme-color" content="#080c10"><link rel="canonical" href="https://satzquatch.com">
+<meta property="og:title" content="Satzquatch — A mind in motion"><meta property="og:description" content="One independent maker. Four worlds to explore."><meta property="og:type" content="website"><meta property="og:url" content="https://satzquatch.com">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/hackers-lair.png"><link rel="stylesheet" href="journey.css"><script src="journey.js" defer></script>
 </head>
 <body>
-
-<!-- Theme Toggle -->
-<button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark/light theme">
-  <svg class="toggle-icon sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-  <svg class="toggle-icon moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.354 15.354A9 9 0 0 1 8.646 3.646 9.75 9.75 0 0 0 12 21a9.75 9.75 0 0 0 4.354-5.646z"/></svg>
-</button>
-
-<div class="atmosphere" aria-hidden="true">
-  <div class="glow"></div>
-  <div class="fog fog-a"></div>
-  <div class="fog fog-b"></div>
-  <div class="grain"></div>
-</div>
-
-<main class="page-short">
-  <header class="hero">
-    <div class="totem" aria-hidden="true">
-      <svg viewBox="0 0 44 44">
-        <defs><linearGradient id="fur" x1="22" y1="12" x2="22" y2="31" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8ed99a"/><stop offset="1" stop-color="#5fbf7a"/></linearGradient></defs>
-        <rect x="2" y="2" width="40" height="40" rx="12" fill="#0c1812" stroke="#6dca84" stroke-width="2"/>
-        <path d="M13 29c3-1 4-4 3-7 2 1 5 0 6-3 1 3 4 4 6 3-1 3 0 6 3 7-2 2-16 2-18 0z" fill="url(#fur)"/>
-        <circle cx="18.4" cy="21" r="2.05" fill="#07110c"/>
-        <circle cx="25.6" cy="21" r="2.05" fill="#07110c"/>
-        <circle cx="19.05" cy="20.4" r=".55" fill="#c8f0d0"/>
-        <circle cx="26.25" cy="20.4" r=".55" fill="#c8f0d0"/>
-      </svg>
-    </div>
-    <p class="eyebrow">Indie app studio</p>
-    <h1>Satzquatch</h1>
-    <p class="tag">An independent one-person app studio. I build focused mobile apps — collection tools, nature tech and utilities — published on the Solana dApp Store, Google Play and the web.</p>
-  </header>
-
-  <section aria-label="Featured Apps">
-    <h2>Apps</h2>
-    <div class="apps">
-      <a class="app" data-app="discvault" href="https://discvault.us">
-        <h3>DiscVault <span class="badge">Android</span></h3>
-        <p>The collector-grade vault for your DVD, Blu-ray &amp; 4K movie collection. Scan barcodes, track every edition, never double-buy. Local-first — your data stays on your device.</p>
-        <span class="link">discvault.us →</span>
-      </a>
-      <a class="app" data-app="leafprint" href="https://leafprint-site.vercel.app">
-        <h3>LeafPrint <span class="badge">Android · 21+</span></h3>
-        <p>Your cannabis, curated. Track and organize your collection privately. 21+ only.</p>
-        <span class="link">Visit site →</span>
-      </a>
-      <a class="app" data-app="vigil" href="https://wildcardnature.github.io/Vigil/">
-        <h3>Vigil <span class="badge">Android</span></h3>
-        <p>Your Solana command center — track airdrops, watch whale wallets in real time, scan tokens for safety and manage your portfolio. Non-custodial, no account needed.</p>
-        <span class="link">Visit site →</span>
-      </a>
-      <a class="app" data-app="wildcard" href="wildcard-nature/">
-        <h3>WildCard Nature <span class="badge">Coming soon</span></h3>
-        <p>Photograph real wildlife and watch AI transform it into collectible trading cards with rarity tiers and lore — minted on Solana.</p>
-        <span class="link">Visit site →</span>
-      </a>
-    </div>
-  </section>
-
-  <footer>
-    <div class="inner">
-      <span>© 2026 Satzquatch. All rights reserved.</span>
-      <span>Apps have their own privacy policies &amp; terms — see each app's site or listing.</span>
-    </div>
-  </footer>
+<a class="skip" href="#discvault">Skip to the apps</a>
+<div class="scene" aria-hidden="true"><canvas id="circuit"></canvas><div class="lair"><img src="assets/hackers-lair.png" alt="" fetchpriority="high"></div><div class="screen-glow"></div><div class="shade"></div><div class="texture"></div></div>
+<header class="masthead"><a class="brand" href="#origin" aria-label="Satzquatch home"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="m3 22 7-13 6 9 6-9 7 13M8 23h16M13 24v4m6-4v4"/></svg>SATZQUATCH<span>INDEPENDENT APP STUDIO</span></a><div class="header-actions"><a href="#discvault">Explore apps ↗</a><button id="motion" type="button" aria-pressed="false" aria-label="Enable reduced motion">Motion <span>on</span></button><a class="contact-link" href="mailto:tex@discvault.us">Get in touch ↗</a></div></header>
+<main>
+<section id="origin" class="chapter opening"><div class="chapter-content"><p class="eyebrow"><span class="live-dot"></span> Somewhere between chaos & creation</p><h1>A MIND<br>IN <em>MOTION.</em></h1><p class="intro-copy">Late nights. Tangled wires. Unreasonably big ideas.<br>Welcome inside the world of Satzquatch.</p><a class="enter" href="#threshold"><span class="enter-arrow">↓</span><span>Scroll to enter<span class="sub-label">ONE MAKER. FOUR WORLDS.</span></span></a></div><div class="room-label"><span class="cross">+</span> THE WORKSPACE<span>Where the ideas begin.</span></div></section>
+<section id="threshold" class="chapter threshold"><div class="chapter-content"><p class="eyebrow">Beyond the screen</p><h2>FOLLOW<br>THE <em>SIGNAL.</em></h2><p>Every idea leads somewhere.</p></div></section>
+<section id="discvault" class="chapter app-chapter" style="--accent:#ffb65c"><article class="chapter-content"><p class="eyebrow">01 / The archive <span>Android</span></p><h2>DISCVault<span class="title-dot">.</span></h2><p class="app-tagline">Your collection. Every last cut.</p><p class="description">A collector-grade vault for your DVD, Blu-ray and 4K collection. Scan barcodes, track every edition, and never double-buy. Your data stays on your device.</p><div class="features"><span>Barcode scanning</span><span>Local-first</span></div><a class="app-link" href="https://discvault.us" target="_blank" rel="noopener">Explore DiscVault <span>↗</span></a><a class="next-stop" href="#leafprint">Next stop: Leafprint ↓</a></article></section>
+<section id="leafprint" class="chapter app-chapter" style="--accent:#b3ed8b"><article class="chapter-content"><p class="eyebrow">02 / The greenhouse <span>Android · 21+</span></p><h2>LEAFPRINT<span class="title-dot">.</span></h2><p class="app-tagline">A little more cultivated.</p><p class="description">Your cannabis, curated. A private space to track and organize your collection, built around the things you want to remember. For adults 21 and over.</p><div class="features"><span>Private collection</span><span>Personal organization</span></div><a class="app-link" href="https://leafprint-site.vercel.app" target="_blank" rel="noopener">Explore Leafprint <span>↗</span></a><a class="next-stop" href="#vigil">Next stop: Vigil ↓</a></article></section>
+<section id="vigil" class="chapter app-chapter" style="--accent:#c4a0ff"><article class="chapter-content"><p class="eyebrow">03 / The watchtower <span>Android</span></p><h2>VIGIL<span class="title-dot">.</span></h2><p class="app-tagline">Eyes on the network.</p><p class="description">Your Solana command center. Track airdrops, watch whale wallets, scan tokens for safety, and manage your portfolio. Non-custodial, with no account needed.</p><div class="features"><span>Live wallet tracking</span><span>Token scanning</span></div><a class="app-link" href="https://wildcardnature.github.io/Vigil/" target="_blank" rel="noopener">Explore Vigil <span>↗</span></a><a class="next-stop" href="#wildcard">Next stop: WildCard Nature ↓</a></article></section>
+<section id="wildcard" class="chapter app-chapter" style="--accent:#70ead7"><article class="chapter-content"><p class="eyebrow">04 / The wilds <span>Coming soon</span></p><h2>WILDCARD<br>NATURE<span class="title-dot">.</span></h2><p class="app-tagline">The real world is collectible.</p><p class="description">Photograph real wildlife. Watch AI transform your discoveries into collectible trading cards with rarity tiers and lore, minted on Solana.</p><div class="features"><span>Wildlife discovery</span><span>AI trading cards</span></div><a class="app-link" href="wildcardnature-website/">Explore WildCard Nature <span>↗</span></a><a class="next-stop" href="#contact">Meet the maker ↓</a></article></section>
+<section id="contact" class="chapter ending"><div class="chapter-content"><p class="eyebrow">The person behind the pixels</p><h2>ONE MAKER.<br><em>STILL EXPLORING.</em></h2><p>I'm the independent developer behind Satzquatch.<br>I build focused apps for collectors, the curious,<br>and people who like to look a little closer.</p><a class="app-link" href="mailto:tex@discvault.us">Let's make contact <span>↗</span></a><a class="next-stop" href="#origin">Back to the workspace ↑</a></div></section>
 </main>
-
-<script>
-  const root = document.getElementById('root');
-  const toggleBtn = document.getElementById('theme-toggle');
-
-  function applyTheme(theme) {
-    if (theme === 'light') root.classList.add('theme-light');
-    else root.classList.remove('theme-light');
-    localStorage.setItem('theme', theme);
-  }
-
-  // Initialize theme
-  const saved = localStorage.getItem('theme');
-  const systemPrefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-  applyTheme(saved === 'light' ? 'light' : (systemPrefersLight ? 'light' : 'dark'));
-
-  toggleBtn.addEventListener('click', () => {
-    const current = root.classList.contains('theme-light') ? 'light' : 'dark';
-    applyTheme(current === 'light' ? 'dark' : 'light');
-  });
-</script>
-</body>
-</html>
+<div id="world-stops" aria-label="Destinations in the circuit landscape"></div>
+<nav class="route" aria-label="Journey stops"><a href="#origin" aria-label="The workspace" aria-current="location"><span class="route-dot"></span><span class="route-name">Origin</span></a><span class="route-line"></span><a href="#discvault"><span class="route-dot"></span><span class="route-name">DiscVault</span></a><span class="route-line"></span><a href="#leafprint"><span class="route-dot"></span><span class="route-name">Leafprint</span></a><span class="route-line"></span><a href="#vigil"><span class="route-dot"></span><span class="route-name">Vigil</span></a><span class="route-line"></span><a href="#wildcard"><span class="route-dot"></span><span class="route-name">WildCard Nature</span></a></nav>
+<footer class="hud"><span><i class="live-dot"></i> <span id="location">THE WORKSPACE</span></span><span class="hud-center">SCROLL TO EXPLORE ↓</span><span id="progress">00 / 100</span></footer>
+<noscript><style>.scene{opacity:.4}.route,.hud,.room-label{display:none}</style></noscript>
+</body></html>
