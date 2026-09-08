@@ -1,375 +1,115 @@
-/**
- * WildCard Nature - Website Scripts
- * Modern interactions and animations
- */
+// Native scrolling remains available with JavaScript disabled.
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+const motionButton = document.querySelector('#motion');
+const collection = document.querySelector('#collection');
+let paused = reducedMotion.matches;
+let scheduled = false;
+function updateScroll() {
+  scheduled = false;
+  const progress = Math.max(
+    0,
+    Math.min(
+      1,
+      scrollY / Math.max(1, document.documentElement.scrollHeight - innerHeight)
+    )
+  );
+  document.documentElement.style.setProperty('--progress', progress);
+  document.documentElement.style.setProperty(
+    '--zoom',
+    paused ? 1 : 1 + Math.min(scrollY / innerHeight, 1) * 0.13
+  );
+  const box = collection.getBoundingClientRect();
+  const reveal = Math.max(
+    0,
+    Math.min(1, -box.top / Math.max(1, box.height - innerHeight))
+  );
+  collection.style.setProperty('--reveal', paused ? 1 : reveal);
+  document.querySelector('header').classList.toggle('scrolled', scrollY > 40);
+}
+function setMotion() {
+  document.body.classList.toggle('no-motion', paused);
+  motionButton.textContent = paused ? 'Motion off' : 'Motion on';
+  motionButton.setAttribute('aria-pressed', String(!paused));
+  updateScroll();
+}
+motionButton.addEventListener('click', () => {
+  paused = !paused;
+  setMotion();
+});
+reducedMotion.addEventListener('change', (event) => {
+  paused = event.matches;
+  setMotion();
+});
+function scheduleScroll() {
+  if (!scheduled) {
+    scheduled = true;
+    requestAnimationFrame(updateScroll);
+  }
+}
+addEventListener('scroll', scheduleScroll, { passive: true });
+addEventListener('resize', scheduleScroll);
+setMotion();
 
-// Initialize on DOM load
-document.addEventListener('DOMContentLoaded', () => {
-  initNavigation();
-  initParticles();
-  initWaitlistForm();
-  initScrollAnimations();
-  initCardAnimations();
+document.querySelectorAll('[data-mode]').forEach((button) =>
+  button.addEventListener('click', () => {
+    document
+      .querySelectorAll('[data-mode]')
+      .forEach((other) => other.setAttribute('aria-pressed', String(other === button)));
+    document.querySelector('#mode-copy').textContent =
+      button.dataset.mode === 'scenic'
+        ? 'Preserve the scene around your subject as your photo becomes collectible art.'
+        : 'A classic trading-card look, with your wildlife discovery as the subject.';
+  })
+);
+
+const spotButton = document.querySelector('#spot');
+spotButton.addEventListener('click', () => {
+  const showing = document.querySelector('#expedition').classList.toggle('spotted');
+  spotButton.setAttribute('aria-expanded', String(showing));
+  spotButton.textContent = showing ? 'Hide field note ↙' : 'Reveal a field note ↗';
+  document.querySelector('#wildlife-note').textContent = showing
+    ? 'Red fox — look beside the stream. In the app, find all six animals to complete the woodland expedition.'
+    : 'Look along the stream. A woodland neighbour is waiting to be found.';
 });
 
-/**
- * Navigation functionality
- */
-function initNavigation() {
-  const nav = document.getElementById('nav');
-  const mobileToggle = document.getElementById('mobileToggle');
-  const mobileMenu = document.getElementById('mobileMenu');
+const menuButton = document.querySelector('#menu-toggle');
+const navigation = document.querySelector('#navigation');
+function closeMenu() {
+  menuButton.setAttribute('aria-expanded', 'false');
+  navigation.classList.remove('open');
+}
+menuButton.addEventListener('click', () => {
+  const open = menuButton.getAttribute('aria-expanded') !== 'true';
+  menuButton.setAttribute('aria-expanded', String(open));
+  navigation.classList.toggle('open', open);
+});
+navigation.addEventListener('click', (event) => {
+  if (event.target.closest('a')) closeMenu();
+});
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    closeMenu();
+    menuButton.focus();
+  }
+});
 
-  // Scroll effect for nav
-  let lastScroll = 0;
-  window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-
-    if (currentScroll > 50) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
-    }
-
-    lastScroll = currentScroll;
-  });
-
-  // Mobile menu toggle
-  mobileToggle.addEventListener('click', () => {
-    mobileMenu.classList.toggle('open');
-    mobileToggle.classList.toggle('active');
-  });
-
-  // Close mobile menu on link click
-  const mobileLinks = mobileMenu.querySelectorAll('a');
-  mobileLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      mobileMenu.classList.remove('open');
-      mobileToggle.classList.remove('active');
-    });
-  });
-
-  // Smooth scroll for anchor links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
+const chapters = [...document.querySelectorAll('.journey a')];
+const sections = chapters.map((link) =>
+  document.querySelector(link.getAttribute('href'))
+);
+if ('IntersectionObserver' in window) {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        chapters.forEach((link) => {
+          if (link.getAttribute('href') === `#${entry.target.id}`)
+            link.setAttribute('aria-current', 'location');
+          else link.removeAttribute('aria-current');
         });
-      }
-    });
-  });
-}
-
-/**
- * Floating particles animation
- */
-function initParticles() {
-  const container = document.getElementById('particles');
-  const particleCount = 30;
-
-  for (let i = 0; i < particleCount; i++) {
-    createParticle(container);
-  }
-}
-
-function createParticle(container) {
-  const particle = document.createElement('div');
-  particle.className = 'particle';
-
-  // Random position
-  particle.style.left = Math.random() * 100 + '%';
-
-  // Random size
-  const size = Math.random() * 4 + 2;
-  particle.style.width = size + 'px';
-  particle.style.height = size + 'px';
-
-  // Random animation duration and delay
-  const duration = Math.random() * 20 + 15;
-  const delay = Math.random() * 20;
-  particle.style.animationDuration = duration + 's';
-  particle.style.animationDelay = delay + 's';
-
-  // Random color (green or blue tint)
-  const colors = ['#22c55e', '#3b82f6', '#8b5cf6', '#10b981'];
-  particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-
-  container.appendChild(particle);
-}
-
-/**
- * Waitlist form handling
- */
-function initWaitlistForm() {
-  const form = document.getElementById('waitlistForm');
-  const successMessage = document.getElementById('waitlistSuccess');
-  const emailInput = document.getElementById('emailInput');
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const email = emailInput.value;
-    const button = form.querySelector('button');
-    const originalText = button.innerHTML;
-
-    // Show loading state
-    button.innerHTML = '<span>Joining...</span>';
-    button.disabled = true;
-
-    // Simulate API call (replace with actual API endpoint)
-    await new Promise(resolve => setTimeout(resolve, 1500));
-
-    // Show success state
-    form.style.display = 'none';
-    successMessage.classList.add('show');
-
-    // Store email in localStorage for demo
-    const waitlist = JSON.parse(localStorage.getItem('waitlist') || '[]');
-    waitlist.push({ email, timestamp: new Date().toISOString() });
-    localStorage.setItem('waitlist', JSON.stringify(waitlist));
-
-    // Update counter (demo)
-    console.log('Email added to waitlist:', email);
-  });
-}
-
-/**
- * Scroll-triggered animations using Intersection Observer
- */
-function initScrollAnimations() {
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.1
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animate-in');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
-
-  // Observe elements
-  const animatedElements = document.querySelectorAll(
-    '.feature-card, .step, .rarity-card, .nft-card, .section-header'
+      });
+    },
+    { rootMargin: '-15% 0px -55% 0px', threshold: 0 }
   );
-
-  animatedElements.forEach(el => {
-    observer.observe(el);
-  });
+  sections.forEach((section) => observer.observe(section));
 }
-
-/**
- * Interactive card animations
- */
-function initCardAnimations() {
-  // Hero card stack hover effect
-  const cardStack = document.querySelector('.card-stack');
-  if (cardStack) {
-    const cards = cardStack.querySelectorAll('.demo-card');
-
-    cardStack.addEventListener('mousemove', (e) => {
-      const rect = cardStack.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5;
-      const y = (e.clientY - rect.top) / rect.height - 0.5;
-
-      cards.forEach((card, index) => {
-        const depth = (3 - index) * 2;
-        const rotateX = y * depth * 2;
-        const rotateY = -x * depth * 2;
-        const translateZ = depth * 10;
-
-        card.style.transform = `
-          perspective(1000px)
-          rotateX(${rotateX}deg)
-          rotateY(${rotateY}deg)
-          translateZ(${translateZ}px)
-        `;
-      });
-    });
-
-    cardStack.addEventListener('mouseleave', () => {
-      cards.forEach((card, index) => {
-        // Reset to original transforms
-        if (index === 0) {
-          card.style.transform = 'rotate(-2deg)';
-        } else if (index === 1) {
-          card.style.transform = 'translateX(20px) translateY(10px) rotate(3deg)';
-        } else {
-          card.style.transform = 'translateX(-20px) translateY(20px) rotate(-5deg)';
-        }
-      });
-    });
-  }
-
-  // Rarity card tilt effect
-  const rarityCards = document.querySelectorAll('.rarity-card');
-  rarityCards.forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width;
-      const y = (e.clientY - rect.top) / rect.height;
-
-      const rotateX = (y - 0.5) * 10;
-      const rotateY = (x - 0.5) * -10;
-
-      card.style.transform = `
-        perspective(1000px)
-        rotateX(${rotateX}deg)
-        rotateY(${rotateY}deg)
-        translateY(-8px)
-      `;
-    });
-
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = '';
-    });
-  });
-
-  // NFT card rotation effect
-  const nftCard = document.querySelector('.nft-card');
-  if (nftCard) {
-    nftCard.addEventListener('mousemove', (e) => {
-      const rect = nftCard.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width;
-      const y = (e.clientY - rect.top) / rect.height;
-
-      const rotateX = (y - 0.5) * 15;
-      const rotateY = (x - 0.5) * -15;
-
-      nftCard.style.transform = `
-        perspective(1000px)
-        rotateX(${rotateX}deg)
-        rotateY(${rotateY}deg)
-      `;
-    });
-
-    nftCard.addEventListener('mouseleave', () => {
-      nftCard.style.transform = '';
-    });
-  }
-}
-
-/**
- * Typing effect for hero text (optional enhancement)
- */
-function initTypingEffect() {
-  const heroTitle = document.querySelector('.hero-title .gradient-text');
-  if (!heroTitle) return;
-
-  const text = heroTitle.textContent;
-  heroTitle.textContent = '';
-  heroTitle.style.opacity = '1';
-
-  let i = 0;
-  const typeInterval = setInterval(() => {
-    if (i < text.length) {
-      heroTitle.textContent += text.charAt(i);
-      i++;
-    } else {
-      clearInterval(typeInterval);
-    }
-  }, 100);
-}
-
-/**
- * Counter animation for stats
- */
-function animateCounters() {
-  const counters = document.querySelectorAll('.stat-value');
-
-  counters.forEach(counter => {
-    const target = counter.textContent;
-    if (target === '∞') return;
-
-    const value = parseInt(target.replace(/\D/g, ''));
-    const suffix = target.replace(/\d/g, '');
-    let current = 0;
-    const increment = value / 50;
-    const duration = 1500;
-    const stepTime = duration / 50;
-
-    const updateCounter = () => {
-      current += increment;
-      if (current < value) {
-        counter.textContent = Math.floor(current) + suffix;
-        setTimeout(updateCounter, stepTime);
-      } else {
-        counter.textContent = target;
-      }
-    };
-
-    updateCounter();
-  });
-}
-
-/**
- * Parallax effect for background elements
- */
-function initParallax() {
-  const parallaxElements = document.querySelectorAll('[data-parallax]');
-
-  window.addEventListener('scroll', () => {
-    const scrollY = window.pageYOffset;
-
-    parallaxElements.forEach(el => {
-      const speed = el.dataset.parallax || 0.5;
-      el.style.transform = `translateY(${scrollY * speed}px)`;
-    });
-  });
-}
-
-/**
- * Theme toggle (for future dark/light mode)
- */
-function initThemeToggle() {
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const savedTheme = localStorage.getItem('theme');
-  const theme = savedTheme || (prefersDark ? 'dark' : 'light');
-
-  document.documentElement.setAttribute('data-theme', theme);
-}
-
-/**
- * Utility: Debounce function
- */
-function debounce(func, wait) {
-  let timeout;
-  return function executedFunction(...args) {
-    const later = () => {
-      clearTimeout(timeout);
-      func(...args);
-    };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
-}
-
-/**
- * Utility: Throttle function
- */
-function throttle(func, limit) {
-  let inThrottle;
-  return function(...args) {
-    if (!inThrottle) {
-      func.apply(this, args);
-      inThrottle = true;
-      setTimeout(() => inThrottle = false, limit);
-    }
-  };
-}
-
-// Performance optimization: Use passive event listeners for scroll
-document.addEventListener('scroll', throttle(() => {
-  // Scroll-based animations here
-}, 100), { passive: true });
-
-// Log for development
-console.log('WildCard Nature website initialized');
