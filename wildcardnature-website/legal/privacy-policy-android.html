@@ -96,7 +96,7 @@
     <div class="container">
         <a class="back-link" href="/wildcardnature-website/">&larr; WildCard Nature</a>
         <h1>Privacy Policy</h1>
-        <p class="last-updated">Effective date: October 19, 2026 &middot; Last updated: October 19, 2026</p>
+        <p class="last-updated">Effective date: October 19, 2026 &middot; Last updated: October 25, 2026</p>
         <p class="edition-note">This policy applies to the Google Play edition of WildCard Nature for Android.</p>
 
         <p>WildCard Nature ("we," "our," or "us") turns the wildlife photos you take into collectible, AI-stylized trading cards. This Privacy Policy explains what information the app collects, how it is used, who it is shared with, how long it is kept, and how you can delete it.</p>
@@ -148,6 +148,7 @@
             <li>Each player can create a limited number of free cards per day. To enforce this fairly, every card-creation request carries a sign-in token that our server checks to confirm which account is making it. The token itself is not stored.</li>
             <li>For each account and day, our server stores a counter made of your account ID (your Google account ID, or your guest ID), your device's local date, and the number of cards created that day.</li>
             <li>The counter is used only for fair use and abuse prevention. It is deleted automatically 3 days after it is created.</li>
+            <li>If you have bought generation packs (see "Purchases" below), a card you create after your free cards for the day uses one of your purchased generations.</li>
             <li><strong>Guests only:</strong> to stop the guest option from being used to get around the daily limit, our server also counts guest cards created from each network per day. The counter is keyed by a one-way hash of your IP address combined with a random secret value that changes every day; the raw IP address is not stored. The secret is deleted after 2 days, so old hashes cannot be linked back to an IP address, and the counter itself is deleted automatically 3 days after it is created. If many guests share one network (for example, a school or office Wi-Fi), they share this network limit; signing in with Google avoids it.</li>
         </ul>
 
@@ -195,16 +196,33 @@
 
         <h3>App activity: in-app actions and other user-generated content</h3>
         <ul>
-            <li>Your game progress, synced to our server: XP, level, streaks, achievements, Field Guide progress, in-game Field Tokens, and daily free-generation usage. If you sign in with Google, it is restored when you reinstall and sign in again. Guest progress is stored the same way, but cannot be restored after the guest ID is lost unless you first moved it into a Google account with <strong>Keep your progress</strong> (see "Two ways to play" above).</li>
+            <li>Your game progress, synced to our server: XP, level, streaks, achievements, Field Guide progress, in-game Field Tokens, daily free-generation usage, and, if you have bought generation packs, your purchased-generation balance. If you sign in with Google, it is restored when you reinstall and sign in again. Guest progress is stored the same way, but cannot be restored after the guest ID is lost unless you first moved it into a Google account with <strong>Keep your progress</strong> (see "Two ways to play" above).</li>
             <li>Your XP and level, published on the leaderboard.</li>
             <li>Species names you enter or confirm for your cards, plus card names you choose. These stay on your device, except for the species of a capture that matches the weekly featured species (see section 3).</li>
         </ul>
 
+        <h3>Purchases (optional)</h3>
+        <p>You can buy optional generation packs in the app. Each purchased generation lets you create one card beyond your free daily allowance. Buying requires Google sign-in; if you play as a guest, the app asks you to sign in with Google first.</p>
+        <div class="highlight">
+            <p><strong>Google Play handles your payment.</strong> Purchases are made through Google Play Billing. Your card, bank, or other payment details go to Google, not to us: neither the app nor our server ever receives them.</p>
+        </div>
+        <ul>
+            <li><strong>RevenueCat:</strong> the app uses RevenueCat, Inc. as our purchase-processing service provider. RevenueCat verifies each purchase with Google Play and notifies our server. The RevenueCat software in the app sends RevenueCat:
+                <ul>
+                    <li>your purchase account ID: "google:" followed by your Google account ID. The app starts RevenueCat only after you sign in with Google, so guests and signed-out players never contact RevenueCat;</li>
+                    <li>for each purchase, the Google Play purchase token (receipt) and transaction details: the product, price, currency, and time of purchase; and</li>
+                    <li>basic technical information the software needs to work, such as your locale and store currency.</li>
+                </ul>
+                The app does not send RevenueCat your name, email address, or advertising ID, and does not turn on RevenueCat's optional collection of device identifiers. RevenueCat states that it does not collect location data (other than locale and currency code), crash logs, or diagnostics.</li>
+            <li><strong>Our server:</strong> when RevenueCat confirms a purchase, our server adds the generations to your account's cloud record and stores a purchase history entry: the product, the number of generations, the Google Play transaction ID, whether it was a test or real purchase, the purchase time, and whether it was refunded.</li>
+            <li><strong>Duplicate protection:</strong> our server also keeps a separate record for each transaction, keyed by its Google Play transaction ID, so that a purchase is never credited twice and refunds are handled correctly. It contains the product, the number of generations, whether it was a test or real purchase, its credit and refund status, and a one-way SHA-256 hash of your Google account ID. It does not contain your Google account ID itself, your name, or your email address.</li>
+            <li><strong>Refunds:</strong> when Google Play refunds a purchase, our server removes that purchase's generations from your balance and marks the history entry as refunded. Generations you have already used cannot be removed, so we record the difference.</li>
+        </ul>
+
         <h3>What we do not collect</h3>
         <ul>
-            <li>We do not collect app performance data or crash logs, advertising or device identifiers, financial or payment information, messages, contacts, health data, or web browsing history.</li>
+            <li>We do not collect app performance data or crash logs, advertising or device identifiers, payment information such as card or bank details, messages, contacts, health data, or web browsing history. We do keep the purchase history described under "Purchases" above.</li>
             <li>The app contains no advertising and no analytics or crash-reporting tools.</li>
-            <li>The app currently has no in-app purchases.</li>
         </ul>
 
         <h2>3. How We Use Your Information</h2>
@@ -219,6 +237,7 @@
             <li><strong>Fair use and abuse prevention:</strong> our server keeps the daily generation counter described in section 2 so each account gets its fair share of free cards, plus the per-network guest counter (keyed by a daily-salted hash of your IP address). It also counts requests per IP address to enforce rate limits. The IP rate-limit counters expire automatically within one hour.</li>
             <li><strong>Security:</strong> to confirm, through Google Play Integrity and Firebase App Check, that requests to our server come from the genuine app (see section 2).</li>
             <li><strong>Display name checks:</strong> to reject names that contain web addresses, email addresses, or offensive words.</li>
+            <li><strong>Purchases:</strong> to process generation pack purchases, verify them with Google Play through RevenueCat, add the generations to your account, keep your purchase history, remove generations when a purchase is refunded, and prevent duplicate credits and purchase fraud.</li>
         </ul>
         <p>We do not sell your personal information, and we do not use it for advertising.</p>
 
@@ -255,9 +274,19 @@
                         <td>The map area you view, which is centered on your cards' rounded locations. The map does not show or track your live location.</td>
                     </tr>
                     <tr>
+                        <td><a href="https://policies.google.com/privacy">Google Play Billing</a></td>
+                        <td>Taking payment for generation packs, and refunds (only if you buy)</td>
+                        <td>Your payment details and order, collected by Google Play under its own terms. We never receive your payment details.</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.revenuecat.com/privacy">RevenueCat</a></td>
+                        <td>Verifying purchases with Google Play and notifying our server</td>
+                        <td>Purchase account ID ("google:" plus your Google account ID; only after you sign in with Google); Google Play purchase token and transaction details (product, price, currency, time); locale and store currency. No name, email address, or advertising ID.</td>
+                    </tr>
+                    <tr>
                         <td><a href="https://www.cloudflare.com/privacypolicy/">Cloudflare Workers</a></td>
-                        <td>Our server: API proxy, progress sync storage, content report storage, rate limiting</td>
-                        <td>Photos in transit to Stability AI; region names; Google account ID or guest ID, and game progress; daily generation counters (account ID, local date, count); per-network guest counters (daily-salted IP hash, date, count); App Check tokens (checked, not stored) and daily pass/fail totals; in-app user ID for weekly discoveries; content reports (with a hashed reporter identifier); IP address for rate limiting</td>
+                        <td>Our server: API proxy, progress sync storage, purchase crediting, content report storage, rate limiting</td>
+                        <td>Photos in transit to Stability AI; region names; Google account ID or guest ID, and game progress; purchased-generation balance and purchase history; per-transaction duplicate-protection records (with a hashed Google account ID); daily generation counters (account ID, local date, count); per-network guest counters (daily-salted IP hash, date, count); App Check tokens (checked, not stored) and daily pass/fail totals; in-app user ID for weekly discoveries; content reports (with a hashed reporter identifier); IP address for rate limiting</td>
                     </tr>
                     <tr>
                         <td><a href="https://stability.ai/privacypolicy">Stability AI</a></td>
@@ -282,6 +311,7 @@
                 </tbody>
             </table>
         </div>
+        <p>RevenueCat acts as our service provider (data processor): it processes purchase data on our behalf and under our instructions.</p>
         <p>Nominatim is an independent public service, not a processor acting on our behalf, so the rounded coordinates sent to it are "shared" data. Its handling of request data is governed by the OpenStreetMap Foundation's privacy policy.</p>
         <p>We may also disclose information when the law requires it, or to protect the rights, safety, and security of our users and the service.</p>
 
@@ -297,6 +327,9 @@
         <ul>
             <li><strong>On your device:</strong> cards, artwork, photos, rounded locations, your profile, your hidden-players list, and sign-in tokens stay on your device until you delete your account, clear the app's data, or uninstall the app. Uninstalling removes them unless you exported a backup file yourself.</li>
             <li><strong>Progress sync (Cloudflare Workers storage):</strong> kept while your account exists, and deleted when you delete your account. This includes guest accounts. If you uninstall or clear the app without deleting your guest account first, its progress record stays on our server, but it is linked only to a random ID that we cannot connect to you.</li>
+            <li><strong>Purchase history and purchased generations (Cloudflare Workers storage):</strong> part of your account's cloud record. Kept while your account exists (the history keeps your most recent 100 purchases), and deleted when you delete your account, together with any purchased generations you have not used.</li>
+            <li><strong>Duplicate-protection records for purchases:</strong> deleted automatically 400 days after the purchase or refund was last processed, so that late refunds are still handled correctly. They are not deleted when you delete your account, but they contain only a one-way hash of your Google account ID, not the ID itself.</li>
+            <li><strong>Google Play and RevenueCat:</strong> keep records of completed purchases under their own privacy policies and to meet their legal, tax, and accounting obligations. Deleting your account in the app does not delete them. To ask us to request deletion of your RevenueCat customer record, email <a href="mailto:tex@discvault.us">tex@discvault.us</a> (see section 7).</li>
             <li><strong>Leaderboard (Google Firebase):</strong> kept while your account exists, and deleted when you delete your account. The anonymous Firebase user is also deleted.</li>
             <li><strong>Daily generation counters:</strong> deleted automatically 3 days after they are created, including after you delete your account. This includes the per-network guest counters; the daily secret used to hash IP addresses is deleted after 2 days.</li>
             <li><strong>App Check totals:</strong> daily counts of requests that passed or failed the integrity check, with no account or device information, deleted automatically after 14 days.</li>
@@ -318,6 +351,10 @@
             <li>Under <strong>Account</strong>, choose <strong>Delete account</strong> and confirm.</li>
         </ol>
         <p>This deletes your synced progress from our server, your leaderboard entry, and your anonymous Firebase user. If you signed in with Google, it also revokes the app's access to your Google account. It then erases the app's data on your device, including your hidden-players list. Guests use the same steps, with no Google step. Content reports you sent are kept until they expire, up to 90 days, and daily generation counters expire within 3 days (see section 6).</p>
+        <div class="highlight">
+            <p><strong>Unused purchased generations are lost when you delete your account.</strong> Deleting your account also deletes your purchase history and any purchased generations you have not used. They cannot be restored, and deleting your account does not refund them.</p>
+        </div>
+        <p>Records of completed purchases held by Google Play and RevenueCat are not deleted by the app (see section 6). To ask us to request deletion of your RevenueCat customer record, email <a href="mailto:tex@discvault.us">tex@discvault.us</a> from the Google account you bought with.</p>
 
         <h3>Delete your account without the app</h3>
         <p>If you no longer have the app installed, follow the instructions at <a href="/wildcardnature-website/legal/delete-account/">WildCard Nature account deletion</a>. If you signed in with Google, you can also email <a href="mailto:tex@discvault.us">tex@discvault.us</a> from that Google account. We process requests within 30 days.</p>
@@ -341,6 +378,7 @@
             <li>The app uses approximate location only, and rounds it on your device before it is used or shared.</li>
             <li>Content reports identify the reporter only by a one-way hash, never by name, email address, or raw IP address.</li>
             <li>API keys for our service providers stay on our server and are never included in the app.</li>
+            <li>Payments are handled by Google Play; your payment details never reach the app or our server. Purchased generations are added only by our server after the purchase is verified, never by the app itself.</li>
         </ul>
         <p>No method of transmission or storage is completely secure, but we work to protect your information.</p>
 

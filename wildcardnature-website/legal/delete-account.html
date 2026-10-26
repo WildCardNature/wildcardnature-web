@@ -83,7 +83,7 @@
     <div class="container">
         <a class="back-link" href="/wildcardnature-website/">&larr; WildCard Nature</a>
         <h1>Delete Your WildCard Nature Account</h1>
-        <p class="last-updated">Last Updated: October 19, 2026</p>
+        <p class="last-updated">Last Updated: October 25, 2026</p>
 
         <p>This page explains how to delete your <strong>WildCard Nature</strong> account and its data. WildCard Nature is published on Google Play by Jason Satz.</p>
 
@@ -125,6 +125,7 @@ Google account email: [your Google account email]</div>
         <h2>4. What Gets Deleted</h2>
         <ul>
             <li><strong>Synced game progress</strong> on our server: XP, level, streaks, achievements, Field Guide progress, in-game Field Tokens, and daily generation usage. For guests, this is the record stored under your guest ID.</li>
+            <li><strong>Purchased generations and purchase history</strong> on our server (Google accounts only): any unused generations from generation packs, and the record of your purchases. Unused purchased generations are lost and are not refunded, so use them before you delete your account.</li>
             <li><strong>Your leaderboard entry:</strong> display name, avatar choice, XP, and level.</li>
             <li><strong>Your anonymous Firebase user</strong>, which is used to access the leaderboard. For guests, this is also your guest ID.</li>
             <li><strong>The app's access to your Google account</strong>, which is revoked (Google sign-in only).</li>
@@ -138,6 +139,8 @@ Google account email: [your Google account email]</div>
             <li><strong>App Check totals:</strong> daily counts of requests that passed or failed our app integrity check. They contain no account, device, or IP information and are deleted automatically after 14 days.</li>
             <li><strong>Rate-limit counters:</strong> keyed by IP address, not by account. They expire automatically within one hour.</li>
             <li><strong>Content reports you sent</strong> about AI-generated artwork or other players: kept for up to <strong>90 days</strong> for safety and moderation review, then deleted automatically. They are not deleted early when you delete your account. A report identifies its sender only by a one-way hash of the Google account ID or guest ID (or, if sign-in could not be verified, of the IP address combined with a secret value that changes daily). Reports never contain your name, email address, or raw IP address. Reports that other players sent about your leaderboard entry contain that entry's ID and are kept on the same 90-day schedule.</li>
+            <li><strong>Purchase duplicate-protection records:</strong> one record per generation pack purchase, keyed by the Google Play transaction ID, so that a purchase or refund is never applied twice. It contains the product, the number of generations, whether the purchase was credited or refunded, and a one-way hash of your Google account ID (never the ID itself, your name, or your email address). It is deleted automatically 400 days after the purchase or refund was last processed.</li>
+            <li><strong>Purchase records held by Google Play and RevenueCat:</strong> Google Play (which takes payment) and RevenueCat (which verifies purchases for us) keep records of completed purchases under their own privacy policies and to meet legal, tax, and accounting obligations. Deleting your account does not delete them. To ask us to request deletion of your RevenueCat customer record, email <a href="mailto:tex@discvault.us">tex@discvault.us</a> from the Google account you bought with.</li>
             <li><strong>Regional species lists</strong> cached by our server: shared reference data with no personal information. These are not deleted.</li>
             <li><strong>Data held by service providers:</strong> photos already sent to Stability AI for stylization are kept under Stability AI's own retention terms. Region names sent to Anthropic are deleted by Anthropic within 30 days under its API terms. See our <a href="/wildcardnature-website/legal/privacy-policy-android/">Privacy Policy</a> for details and links.</li>
             <li><strong>Backup files you exported yourself:</strong> these are stored wherever you saved them, outside our control. Delete them yourself if you no longer want them.</li>
